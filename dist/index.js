@@ -2787,6 +2787,8 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
                         console.log("\x1b[32m%s\x1b[0m", "Visit the URL to input the secrets:");
                         console.log(secretUrl);
                         console.log("waiting");
+                        process.stdout.write("testing");
+                        process.stdout.write("......");
                     }
                     yield sleep(9000);
                     process.stdout.write(".");
