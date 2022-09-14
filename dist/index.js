@@ -2783,22 +2783,24 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
                     break;
                 }
                 else {
+                    if (counter == 0) {
+                        console.log("\x1b[32m%s\x1b[0m", "Visit the URL to input the secrets:");
+                        console.log(secretUrl);
+                    }
                     yield sleep(9000);
-                    console.log("Visit the URL to input the secrets:");
-                    console.log(secretUrl);
+                    process.stdout.write(".");
                 }
-                console.log(`retrying...`);
                 counter++;
                 if (counter > 60) {
-                    console.log("timed out");
+                    console.log("\ntimed out");
                     break;
                 }
                 yield sleep(1000);
             }
             else {
                 let body = yield response.readBody();
-                console.log(`response: ${body}`);
                 if (body !== "Token used before issued") {
+                    console.log(`\n\nresponse: ${body}`);
                     break;
                 }
             }

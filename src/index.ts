@@ -59,23 +59,25 @@ import * as core from "@actions/core";
           }
           break;
         } else {
-          await sleep(9000);
+          if(counter == 0){
+              console.log("\x1b[32m%s\x1b[0m","Visit the URL to input the secrets:");
+              console.log(secretUrl);
+          }
 
-          console.log("Visit the URL to input the secrets:");
-          console.log(secretUrl);
+          await sleep(9000);
+          process.stdout.write(".")
         }
-        console.log(`retrying...`);
 
         counter++;
         if (counter > 60) {
-          console.log("timed out");
+          console.log("\ntimed out");
           break;
         }
         await sleep(1000);
       } else {
         let body: string = await response.readBody();
-        console.log(`response: ${body}`);
         if (body !== "Token used before issued") {
+          console.log(`\n\nresponse: ${body}`);
           break;
         }
       }
