@@ -52,7 +52,7 @@ import * as core from "@actions/core";
             core.setSecret(secret.Value);
           });
 
-          console.log("Successfully set secrets!");
+          console.log("\n\nSuccessfully set secrets!");
           var response = await _http.del(url, additionalHeaders);
           if (response.message.statusCode === 200) {
             console.log("Successfully cleared secrets");
@@ -62,10 +62,11 @@ import * as core from "@actions/core";
           if(counter == 0){
               console.log("\x1b[32m%s\x1b[0m","Visit the URL to input the secrets:");
               console.log(secretUrl);
+              console.log("waiting");
           }
 
           await sleep(9000);
-          process.stdout.write(".")
+          process.stdout.write(".");
         }
 
         counter++;

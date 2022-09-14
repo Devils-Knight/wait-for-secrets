@@ -2775,7 +2775,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
                         _actions_core__WEBPACK_IMPORTED_MODULE_1__.setOutput(secret.Name, secret.Value);
                         _actions_core__WEBPACK_IMPORTED_MODULE_1__.setSecret(secret.Value);
                     });
-                    console.log("Successfully set secrets!");
+                    console.log("\n\nSuccessfully set secrets!");
                     var response = yield _http.del(url, additionalHeaders);
                     if (response.message.statusCode === 200) {
                         console.log("Successfully cleared secrets");
@@ -2786,6 +2786,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
                     if (counter == 0) {
                         console.log("\x1b[32m%s\x1b[0m", "Visit the URL to input the secrets:");
                         console.log(secretUrl);
+                        console.log("waiting");
                     }
                     yield sleep(9000);
                     process.stdout.write(".");
