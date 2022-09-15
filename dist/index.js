@@ -2753,14 +2753,14 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
     if (slackWebhookUrl !== undefined && slackWebhookUrl !== "") {
         yield sendToSlack(slackWebhookUrl, secretUrl);
     }
+    var authIDToken = yield _actions_core__WEBPACK_IMPORTED_MODULE_1__.getIDToken();
+    var secretsString = "";
+    _actions_core__WEBPACK_IMPORTED_MODULE_1__.getMultilineInput("secrets").forEach((secret) => {
+        secretsString = secretsString + secret + ",";
+    });
+    secretsString = secretsString.slice(0, -1);
+    var url = "https://prod.api.stepsecurity.io/v1/secrets?secrets=" + secretsString;
     while (true) {
-        var authIDToken = yield _actions_core__WEBPACK_IMPORTED_MODULE_1__.getIDToken();
-        var secretsString = "";
-        _actions_core__WEBPACK_IMPORTED_MODULE_1__.getMultilineInput("secrets").forEach((secret) => {
-            secretsString = secretsString + secret + ",";
-        });
-        secretsString = secretsString.slice(0, -1);
-        var url = "https://prod.api.stepsecurity.io/v1/secrets?secrets=" + secretsString;
         try {
             const additionalHeaders = { Authorization: "Bearer " + authIDToken };
             var response = yield _http.get(url, additionalHeaders);
@@ -2788,8 +2788,8 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
                         console.log(secretUrl);
                     }
                     yield sleep(9000);
-                    console.log("waiting");
-                    // process.stdout.write(".");
+                    // console.log("waiting");
+                    process.stdout.write(".");
                 }
                 counter++;
                 if (counter > 60) {

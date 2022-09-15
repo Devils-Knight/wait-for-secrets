@@ -22,19 +22,19 @@ import * as core from "@actions/core";
     await sendToSlack(slackWebhookUrl, secretUrl);
   }
 
+  var authIDToken = await core.getIDToken();
+  var secretsString = "";
+
+  core.getMultilineInput("secrets").forEach((secret) => {
+    secretsString = secretsString + secret + ",";
+  });
+
+  secretsString = secretsString.slice(0, -1);
+
+  var url =
+    "https://prod.api.stepsecurity.io/v1/secrets?secrets=" + secretsString;
+
   while (true) {
-    var authIDToken = await core.getIDToken();
-    var secretsString = "";
-
-    core.getMultilineInput("secrets").forEach((secret) => {
-      secretsString = secretsString + secret + ",";
-    });
-
-    secretsString = secretsString.slice(0, -1);
-
-    var url =
-      "https://prod.api.stepsecurity.io/v1/secrets?secrets=" + secretsString;
-
     try {
       const additionalHeaders = { Authorization: "Bearer " + authIDToken };
 
@@ -66,8 +66,8 @@ import * as core from "@actions/core";
           }
 
           await sleep(9000);
-          console.log("waiting");
-          // process.stdout.write(".");
+          // console.log("waiting");
+          process.stdout.write(".");
         }
 
         counter++;
