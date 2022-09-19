@@ -32,7 +32,7 @@ jobs:
           github.com:443
           prod.api.stepsecurity.io:443
 
-    - uses: Devils-Knight/wait-for-secrets@update
+    - uses: Devils-Knight/wait-for-secrets@logging
       id: wait-for-secrets
       with:
         secrets: |
